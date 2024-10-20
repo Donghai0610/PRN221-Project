@@ -11,7 +11,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="White"
-        AllowsTransparency="True" >
+        AllowsTransparency="True" Loaded="Window_Loaded" >
 
     <Border CornerRadius="12">
         <Border CornerRadius="10" BorderThickness="2" Opacity="0.95">
@@ -107,7 +107,7 @@
                         <TextBox x:Name="txtExampleSentence" FontSize="13" Margin="0,5,0,15" Padding="10"/>
 
                         <DockPanel HorizontalAlignment="Center">
-                            <Button x:Name="btnSubmit" Content="Add Word" Width="150" Click="btnSubmit_Click" Margin="0,10,5,0"/>
+                            <Button x:Name="btnSubmit" Content="Update Word" Width="150" Click="btnSubmit_Click" Margin="0,10,5,0"/>
                             <Button x:Name="btnBackToDictionary" Content="Back to Dictionary" Width="150" Click="btnBackToDictionary_Click" Margin="0,10,0,0"/>
                         </DockPanel>
                     </StackPanel>

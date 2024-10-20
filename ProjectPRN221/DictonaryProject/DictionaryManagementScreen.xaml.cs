@@ -27,6 +27,7 @@ namespace DictonaryProject
         public DictionaryManagementScreen()
         {
             InitializeComponent();
+            LoadNotification();
         }
 
         private void btnAddWord_Click(object sender, RoutedEventArgs e)
@@ -36,6 +37,11 @@ namespace DictonaryProject
             this.Close();
         }
 
+        void LoadNotification()
+        {
+            int unapprovedWordCount = _dictionaryRepository.GetUnapprovedWordCount();
+            txtUnapprovedWordCount.Text = $"Unapproved words: {unapprovedWordCount}";
+        }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -75,6 +81,33 @@ namespace DictonaryProject
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
 
+            if (dgvDictionary.SelectedItem != null)
+            {
+                dynamic selectedItem = dgvDictionary.SelectedItem;
+
+                int wordId = selectedItem.WordId;
+
+                var result = MessageBox.Show("Are you sure you want to delete this word?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    bool isDeleted = _dictionaryRepository.DeleteWord(wordId);
+                    if (isDeleted)
+                    {
+                        MessageBox.Show("Word deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ShowDictionaries();
+                        LoadNotification();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Word deletion failed.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a word to delete.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void ShowCategories()
@@ -88,7 +121,6 @@ namespace DictonaryProject
 
         private void ShowDictionaries()
         {
-            dgvDictionary.ItemsSource = null;
             var dictionaries = _dictionaryRepository.GetAllWordsOfAdmin();
             dgvDictionary.ItemsSource = dictionaries;
         }
@@ -109,11 +141,48 @@ namespace DictonaryProject
                 int wordId = selectedItem.WordId;
 
                 UpdateWordScreen updateWordScreen = new UpdateWordScreen(wordId);
+                updateWordScreen.Closed += (s, args) => ShowDictionaries(); // Gắn sự kiện Closed
                 updateWordScreen.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Please select a word to update.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void dgvDictionary_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgvDictionary.SelectedItem != null)
+            {
+                dynamic selectedItem = dgvDictionary.SelectedItem;
+                string isApproved = selectedItem.IsApproved;
+                if (isApproved == "Đợi duyệt") // Nếu từ chưa được duyệt
+                {
+                    // Hiển thị form xác nhận
+                    var result = MessageBox.Show("Từ này chưa được duyệt. Bạn có muốn phê duyệt không?",
+                                                 "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Gọi hàm phê duyệt từ
+                        ApprovedWord(selectedItem.WordId);
+                    }
+                }
+            }
+        }
+
+        void ApprovedWord(int wordID)
+        {
+            bool isApproved = _dictionaryRepository.ApproveWord(wordID);
+            if (isApproved)
+            {
+                MessageBox.Show("Word approved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                ShowDictionaries();
+                LoadNotification();
+            }
+            else
+            {
+                MessageBox.Show("Word approval failed.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

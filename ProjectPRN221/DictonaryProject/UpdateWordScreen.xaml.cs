@@ -30,6 +30,7 @@ namespace DictonaryProject
         {
             InitializeComponent();
             wordID = id;
+            ShowCategories();
             LoadData();
 
         }
@@ -110,11 +111,9 @@ namespace DictonaryProject
 
             if (word != null)
             {
-                // Điền dữ liệu vào các trường trong form
                 txtEnglishWord.Text = word.EnglishWord;
                 txtPronunciation.Text = word.Pronunciation;
 
-                // Lấy nghĩa của từ và điền vào các trường
                 var meaning = word.Meanings.FirstOrDefault();
                 if (meaning != null)
                 {
@@ -123,10 +122,8 @@ namespace DictonaryProject
                     txtExampleSentence.Text = meaning.ExampleSentence;
                 }
 
-                // Điền danh sách danh mục
                 foreach (var category in word.Categories)
                 {
-                    // Tìm danh mục trong ListBox và chọn nó
                     foreach (var item in lstCategories.Items)
                     {
                         if (item is Category cat && cat.CategoryName == category.CategoryName)
@@ -141,6 +138,19 @@ namespace DictonaryProject
                 MessageBox.Show("Không tìm thấy từ này.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close(); // Đóng form nếu không tìm thấy từ
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //ShowCategories();
+        }
+
+        private void ShowCategories()
+        {
+            var categories = _dictionaryRepository.GetAllCategories();
+            lstCategories.ItemsSource = categories;
+            lstCategories.DisplayMemberPath = "CategoryName";
+
         }
     }
 }

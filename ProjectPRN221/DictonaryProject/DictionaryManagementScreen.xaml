@@ -128,17 +128,10 @@
                 </StackPanel>
                 
                 <!-- DataGrid hiển thị kết quả -->
-                <DataGrid x:Name="dgvDictionary" Grid.Row="2" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="dgvDictionary_MouseDoubleClick" >
+                <DataGrid x:Name="dgvDictionary" Grid.Row="2" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="dgvDictionary_MouseDoubleClick" SelectionChanged="dgvDictionary_SelectionChanged" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="WordId" Binding="{Binding WordId}" Visibility="Hidden"/>
-                        <DataGridTextColumn Header="EnglishWord" Binding="{Binding EnglishWord}"/>
-                        <DataGridTextColumn Header="Pronunciation" Binding="{Binding Pronunciation}"/>
-                        <DataGridTextColumn Header="CreatedBy" Binding="{Binding CreatedBy}"/>
-                        <DataGridTextColumn Header="CategoryName" Binding="{Binding CategoryName}"/>
-                        <DataGridTextColumn Header="MeaningEnglish" Binding="{Binding MeaningEnglish}"/>
-                        <DataGridTextColumn Header="MeaningVietnamese" Binding="{Binding MeaningVietnamese}"/>
-                        <DataGridTextColumn Header="Example" Binding="{Binding Example}"/>
-                        <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}"/>
+                      
                         
                     </DataGrid.Columns>
                 </DataGrid>

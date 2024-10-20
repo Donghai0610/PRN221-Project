@@ -105,9 +105,9 @@ namespace DictonaryProject.DataAccess
                             Example = m.ExampleSentence
                         }).ToList()
                     })
+                    .Distinct()
                     .ToList();
 
-                // Tạo danh sách đối tượng trả về
                 var result = dictionary.Select(d => new
                 {
                     EnglishWord = d.EnglishWord,
