@@ -1,16 +1,17 @@
-﻿<Window x:Class="DictonaryProject.AddNewWordScreen"
+﻿<Window x:Class="DictonaryProject.UpdateWordScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DictonaryProject"
         mc:Ignorable="d"
-        Title="Add New Word" Height="600" Width="1000"
+        Title="UpdateWordScreen" 
+        Height="600" Width="1000"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Background="White"
-        AllowsTransparency="True" Loaded="Window_Loaded">
+        AllowsTransparency="True" >
 
     <Border CornerRadius="12">
         <Border CornerRadius="10" BorderThickness="2" Opacity="0.95">
@@ -41,12 +42,12 @@
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="25"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Add New Word" Foreground="DarkGray" FontSize="10" FontFamily="Montserrat" 
-                               Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBlock Text="Update New Word" Foreground="DarkGray" FontSize="10" FontFamily="Montserrat" 
+                           Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
 
                     <!-- Nút thu nhỏ -->
                     <Button x:Name="btnMinimize" BorderThickness="0" Content="-" Foreground="White" FontSize="16"
-                            FontFamily="Montserrat" Cursor="Hand" Grid.Column="1" Click="btnMinimize_Click">
+                        FontFamily="Montserrat" Cursor="Hand" Grid.Column="1" Click="btnMinimize_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#28AEED"/>
@@ -61,7 +62,7 @@
 
                     <!-- Nút đóng -->
                     <Button x:Name="btnClose" BorderThickness="0" Content="X" Foreground="White" FontSize="12"
-                            FontFamily="Montserrat" Cursor="Hand" Grid.Column="2" Click="btnClose_Click">
+                        FontFamily="Montserrat" Cursor="Hand" Grid.Column="2" Click="btnClose_Click">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#DA34AE"/>
@@ -78,7 +79,7 @@
                 <!-- Thêm ScrollViewer bao quanh StackPanel -->
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <StackPanel Margin="20">
-                        <TextBlock Text="Add New Word" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,20,0,10"/>
+                        <TextBlock Text="Update New Word" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,20,0,10"/>
 
                         <TextBlock Text="English Word:" Foreground="DarkGray" FontSize="12"/>
                         <TextBox x:Name="txtEnglishWord" FontSize="13" Margin="0,5,0,15" Padding="10"/>
@@ -114,5 +115,6 @@
             </Grid>
         </Border>
     </Border>
-    
+
+
 </Window>

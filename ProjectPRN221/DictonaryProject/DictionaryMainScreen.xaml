@@ -9,11 +9,11 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent"
-        AllowsTransparency="True" MouseDown="Window_MouseDown">
+        Background="White"
+        AllowsTransparency="True" MouseDown="Window_MouseDown" Loaded="Window_Loaded">
 
    <Border CornerRadius="12">
-        <Border CornerRadius="10" BorderThickness="2" Opacity="0.95">
+        <Border CornerRadius="10" BorderThickness="2" Opacity="0.95" >
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#462AD8" Offset="0"/>
@@ -107,19 +107,22 @@
                 <!-- Các ô tìm kiếm -->
                 <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
                     <TextBlock Text="Search by Word" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat"/>
-                    <TextBox x:Name="txtSearchWord" FontSize="13" FontFamily="Montserrat" Height="30" Margin="0,5,0,10" Padding="10"/>
+                    <TextBox x:Name="txtSearchWord" FontSize="12" FontFamily="Montserrat" Height="30" Margin="0,5,0,10" />
 
                     <TextBlock Text="Search by Category" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat"/>
-                    <ComboBox x:Name="cmbCategories" FontSize="13" FontFamily="Montserrat" Height="30" Margin="0,5,0,10">
+                    <ComboBox x:Name="cboCategories" FontSize="12" FontFamily="Montserrat" Height="30" Margin="0,5,0,10">
                         <!-- Thêm các mục cho danh sách chọn -->
                     </ComboBox>
-
-                    <Button x:Name="btnSearch" Content="Search" Width="100" Height="30" />
-                    <Button x:Name="btnAddWord" Content="Add Word" Width="100" Height="30" Margin="0,10,0,0"/>
+                    <DockPanel HorizontalAlignment="Center">
+                        <Button x:Name="btnSearch" Content="Search" Width="100" Height="30" Click="btnSearch_Click_1" Margin="0,10,10,0"  />
+                        <Button x:Name="btnAddWord" Content="Add Word" Width="100" Height="30" Margin="0,10,10,0" Click="btnAddWord_Click"   />
+                        <Button x:Name="btnReset" Content="Reset" Width="100" Height="30" Margin="0,10,10,0" Click="btnReset_Click"/>
+                    </DockPanel>
+                 
                 </StackPanel>
 
                 <!-- DataGrid hiển thị kết quả -->
-                <DataGrid x:Name="dataGridResults" Grid.Row="2" AutoGenerateColumns="True" Margin="10"/>
+                <DataGrid x:Name="dgvDictionary" Grid.Row="2" AutoGenerateColumns="True" Margin="10" />
             </Grid>
         </Border>
     </Border>

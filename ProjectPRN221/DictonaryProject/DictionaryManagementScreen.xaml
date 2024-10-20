@@ -5,8 +5,144 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DictonaryProject"
         mc:Ignorable="d"
-        Title="DictionaryManagementScreen" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="DictionaryManagementScreen"  Height="500" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="WhiteSmoke"
+        AllowsTransparency="True" Loaded="Window_Loaded">
+    <Border CornerRadius="12">
+        <Border CornerRadius="10" BorderThickness="2" Opacity="0.95" >
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="AliceBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <!-- Để hiển thị DataGrid -->
+                </Grid.RowDefinitions>
+
+                <!-- Thanh tiêu đề -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Dictionary Management" Foreground="DarkGray" FontSize="10" FontFamily="Montserrat" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+                    <Button x:Name="btnMinimize" BorderThickness="0" Content="-" Foreground="White" FontSize="16"
+                         FontFamily="Montserrat" Cursor="Hand" Grid.Column="1" Click="btnMinimize_Click" >
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#28AEED"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#278BEF"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                     CornerRadius="9"
+                                     Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="btnClose"                          
+
+                          BorderThickness="0"
+                          Content="X"
+                          Foreground="White"
+                          FontSize="12"
+                          FontFamily="Montserrat"
+                          Cursor="Hand"
+                          Grid.Column="2"
+                          Click="btnClose_Click">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#DA34AE"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#C62DAE"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="18" Height="18"
+                                                CornerRadius="9"
+                                                Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <!-- Các ô tìm kiếm -->
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Search by Word" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat"/>
+                    <TextBox x:Name="txtSearchWord" FontSize="12" FontFamily="Montserrat" Height="30" Margin="0,5,0,10" />
+
+                    <TextBlock Text="Search by Category" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat"/>
+                    <ComboBox x:Name="cboCategories" FontSize="12" FontFamily="Montserrat" Height="30" Margin="0,5,0,10" SelectionChanged="cboCategories_SelectionChanged">
+                        <!-- Thêm các mục cho danh sách chọn -->
+                    </ComboBox>
+                    <DockPanel HorizontalAlignment="Center">
+                        <Button x:Name="btnSearch" Content="Search" Width="100" Height="30" Click="btnSearch_Click_1" Margin="0,10,10,0"  />
+                        <Button x:Name="btnAddWord" Content="Add Word" Width="100" Height="30" Margin="0,10,10,0" Click="btnAddWord_Click"   />
+                        <Button x:Name="btnReset" Content="Reset" Width="100" Height="30" Margin="0,10,10,0" Click="btnReset_Click"/>
+                        <Button x:Name="btnDelete" Content="Delete" Width="100" Height="30" Margin="0,10,10,0" Click="btnDelete_Click"/>
+
+                    </DockPanel>
+                    <TextBlock x:Name="txtUnapprovedWordCount" 
+                               Text="Unapproved words: 0" 
+                               FontSize="16" 
+                               FontWeight="Bold" 
+                               Foreground="Red" 
+                               Margin="10"/>
+                </StackPanel>
+                
+                <!-- DataGrid hiển thị kết quả -->
+                <DataGrid x:Name="dgvDictionary" Grid.Row="2" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="dgvDictionary_MouseDoubleClick" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="WordId" Binding="{Binding WordId}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="EnglishWord" Binding="{Binding EnglishWord}"/>
+                        <DataGridTextColumn Header="Pronunciation" Binding="{Binding Pronunciation}"/>
+                        <DataGridTextColumn Header="CreatedBy" Binding="{Binding CreatedBy}"/>
+                        <DataGridTextColumn Header="CategoryName" Binding="{Binding CategoryName}"/>
+                        <DataGridTextColumn Header="MeaningEnglish" Binding="{Binding MeaningEnglish}"/>
+                        <DataGridTextColumn Header="MeaningVietnamese" Binding="{Binding MeaningVietnamese}"/>
+                        <DataGridTextColumn Header="Example" Binding="{Binding Example}"/>
+                        <DataGridTextColumn Header="Approved" Binding="{Binding IsApproved}"/>
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

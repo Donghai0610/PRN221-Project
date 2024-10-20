@@ -99,6 +99,7 @@ namespace DictonaryProject.DataAccess
 
                     if (user != null)
                     {
+                        CurrentUser.SetUser(user);
                         var role = user.Roles.FirstOrDefault();
                         if (role != null)
                         {
