@@ -28,6 +28,11 @@ namespace DictonaryProject
         {
             InitializeComponent();
             LoadNotification();
+            if(CurrentUser.LoggedInUser != null)
+            {
+                txtUsername.Text = CurrentUser.LoggedInUser.Username;
+
+            }
         }
 
         private void btnAddWord_Click(object sender, RoutedEventArgs e)
@@ -184,6 +189,14 @@ namespace DictonaryProject
             {
                 MessageBox.Show("Word approval failed.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentUser.ClearUser();
+            var loginWindow = new MainWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }

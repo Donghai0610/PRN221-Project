@@ -38,6 +38,7 @@ namespace DictonaryProject.DataAccess
                     .Where(d => d.IsApproved == true) // Chỉ lấy các từ được phê duyệt
                     .Select(d => new
                     {
+                        WordID = d.WordId,
                         EnglishWord = d.EnglishWord,
                         Pronunciation = d.Pronunciation,
                         Categories = d.Categories.Select(c => c.CategoryName).ToList(),
@@ -46,13 +47,14 @@ namespace DictonaryProject.DataAccess
                             MeaningEnglish = m.EnglishMeaning,
                             MeaningVietnamese = m.VietnameseMeaning,
                             Example = m.ExampleSentence
-                        }).ToList()
+                        }).ToList() 
                     })
                     .ToList();
 
                 // Tạo danh sách đối tượng trả về
                 var result = dictionary.Select(d => new
                 {
+                    WordId = d.WordID,
                     EnglishWord = d.EnglishWord,
                     Pronunciation = d.Pronunciation,
                     CategoryName = string.Join(", ", d.Categories), // Gộp tên danh mục thành chuỗi
@@ -92,6 +94,7 @@ namespace DictonaryProject.DataAccess
                     .Where(d => d.IsApproved == true) // Chỉ lấy các từ đã được phê duyệt
                     .Select(d => new
                     {
+                        WordId = d.WordId,
                         EnglishWord = d.EnglishWord,
                         Pronunciation = d.Pronunciation,
                         CategoryName = string.Join(", ", d.Categories.Select(c => c.CategoryName)), // Gộp tên danh mục thành chuỗi

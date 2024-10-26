@@ -143,6 +143,10 @@ namespace DictonaryProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //ShowCategories();
+            if(CurrentUser.LoggedInUser != null)
+            {
+                txtUsername.Text = CurrentUser.LoggedInUser.Username;
+            }
         }
 
         private void ShowCategories()
@@ -151,6 +155,14 @@ namespace DictonaryProject
             lstCategories.ItemsSource = categories;
             lstCategories.DisplayMemberPath = "CategoryName";
 
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentUser.ClearUser();
+            var loginWindow = new MainWindow();
+            loginWindow.Show();
+            this.Close();
         }
     }
 }

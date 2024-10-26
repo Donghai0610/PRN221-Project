@@ -51,6 +51,10 @@ namespace DictonaryProject
         {
             ShowCategories();
             ShowDictionaries();
+            if (CurrentUser.LoggedInUser != null)
+            {
+                txtUsername.Text = CurrentUser.LoggedInUser.Username;
+            }
         }
 
         private void ShowCategories()
@@ -100,6 +104,32 @@ namespace DictonaryProject
         {
             AddNewWordScreen addNewWordScreen = new AddNewWordScreen();
             addNewWordScreen.Show();
+            this.Close();
+        }
+
+        private void dgvDictionary_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgvDictionary.SelectedItem != null)
+            {
+                dynamic selectedItem = dgvDictionary.SelectedItem;
+
+                int wordId = selectedItem.WordId;
+
+                WordDetail wordDetail = new WordDetail(wordId);
+                wordDetail.Closed += (s, args) => ShowDictionaries(); // Gắn sự kiện Closed
+                wordDetail.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a word to update.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentUser.ClearUser();
+            var loginWindow = new MainWindow();
+            loginWindow.Show();
             this.Close();
         }
     }

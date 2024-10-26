@@ -33,16 +33,15 @@ namespace DictonaryProject.DataAccess
         {
             using (PersonalDictionaryDBContext context = new PersonalDictionaryDBContext())
             {
-                // Truy vấn danh sách từ điển và bao gồm thông tin người tạo
                 var dictionary = context.Dictionaries
-                    .OrderBy(d => d.IsApproved) // Sắp xếp từ chưa phê duyệt lên đầu
+                    .OrderBy(d => d.IsApproved) 
                     .Select(d => new
                     {
                         WordID = d.WordId,
                         EnglishWord = d.EnglishWord,
                         Pronunciation = d.Pronunciation,
                         IsApproved = d.IsApproved,
-                        CreatedBy = d.CreatedByNavigation.Username, // Lấy tên người tạo
+                        CreatedBy = d.CreatedByNavigation.Username, 
                         Categories = d.Categories.Select(c => c.CategoryName).ToList(),
                         Meanings = d.Meanings.Select(m => new
                         {
@@ -93,6 +92,7 @@ namespace DictonaryProject.DataAccess
                     .OrderBy(d => d.IsApproved)
                     .Select(d => new
                     {
+                        WordID = d.WordId,
                         EnglishWord = d.EnglishWord,
                         Pronunciation = d.Pronunciation,
                         IsApproved = d.IsApproved,
@@ -105,11 +105,12 @@ namespace DictonaryProject.DataAccess
                             Example = m.ExampleSentence
                         }).ToList()
                     })
-                    .Distinct()
+                    
                     .ToList();
 
                 var result = dictionary.Select(d => new
                 {
+                    WordId = d.WordID,
                     EnglishWord = d.EnglishWord,
                     Pronunciation = d.Pronunciation,
                     CreatedBy = d.CreatedBy, // Tên người tạo
