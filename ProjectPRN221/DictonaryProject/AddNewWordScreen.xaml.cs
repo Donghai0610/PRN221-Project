@@ -49,6 +49,7 @@ namespace DictonaryProject
             }
 
             string englishWord = txtEnglishWord.Text;
+            string type = cbTypeOfWord.Text;
             string pronunciation = txtPronunciation.Text;
             string englishMeaning = txtMeaningEnglish.Text;
             string vietnameseMeaning = txtMeaningVietnamese.Text;
@@ -76,7 +77,7 @@ namespace DictonaryProject
 
 
             // Thực hiện thêm từ mới
-            bool isAdded = _dictionaryRepository.AddNewWord(englishWord, categoryNames, pronunciation, createdByUserId,
+            bool isAdded = _dictionaryRepository.AddNewWord(englishWord,type, categoryNames, pronunciation, createdByUserId,
                                       englishMeaning, vietnameseMeaning, exampleSentence,
                                       isUser, addCategoryIfNotExist);
 

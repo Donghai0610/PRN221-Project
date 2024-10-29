@@ -16,10 +16,12 @@ namespace DictonaryProject.Repository
             return DictionaryDAO.Instance.AddCategory(categoryName);
         }
 
-        public bool AddNewWord(string englishWord, List<string> categoryNames, string pronunciation, int createdByUserId, string englishMeaning, string vietnameseMeaning, string exampleSentence, bool isUser, bool addCategoryIfNotExist)
+        public bool AddNewWord(string englishWord, string type, List<string> categoryNames, string pronunciation, int createdByUserId, string englishMeaning, string vietnameseMeaning, string exampleSentence, bool isUser, bool addCategoryIfNotExist)
         {
-            return DictionaryDAO.Instance.AddNewWord(englishWord, categoryNames, pronunciation, createdByUserId, englishMeaning, vietnameseMeaning, exampleSentence, isUser, addCategoryIfNotExist);
+            return DictionaryDAO.Instance.AddNewWord(englishWord,type, categoryNames, pronunciation, createdByUserId, englishMeaning, vietnameseMeaning, exampleSentence, isUser, addCategoryIfNotExist);
         }
+
+      
 
         public bool ApproveWord(int dictionaryId)
         {
@@ -66,9 +68,9 @@ namespace DictonaryProject.Repository
            return DictionaryManagementDAO.Instance.SearchByWordAndCategory(keyword, categoryName);
         }
 
-        public bool UpdateWord(int wordId, string englishWord, List<string> categoryNames, string pronunciation, int createdByUserId, string englishMeaning, string vietnameseMeaning, string exampleSentence)
+        public bool UpdateWord(int wordId, string englishWord,string typeOfWord, List<string> categoryNames, string pronunciation, int createdByUserId, string englishMeaning, string vietnameseMeaning, string exampleSentence)
         {
-            return DictionaryManagementDAO.Instance.UpdateWord(wordId, englishWord, categoryNames, pronunciation, createdByUserId, englishMeaning, vietnameseMeaning, exampleSentence);
+            return DictionaryManagementDAO.Instance.UpdateWord(wordId, englishWord,typeOfWord, categoryNames, pronunciation, createdByUserId, englishMeaning, vietnameseMeaning, exampleSentence);
         }
 
         public bool ValidateWordExistence(string englishWord, string englishMeaning, string vietnameseMeaning)

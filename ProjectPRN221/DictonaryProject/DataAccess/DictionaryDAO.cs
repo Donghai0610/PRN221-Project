@@ -40,6 +40,7 @@ namespace DictonaryProject.DataAccess
                     {
                         WordID = d.WordId,
                         EnglishWord = d.EnglishWord,
+                        TypeOfWord = d.TypeOfWord,
                         Pronunciation = d.Pronunciation,
                         Categories = d.Categories.Select(c => c.CategoryName).ToList(),
                         Meanings = d.Meanings.Select(m => new
@@ -56,6 +57,7 @@ namespace DictonaryProject.DataAccess
                 {
                     WordId = d.WordID,
                     EnglishWord = d.EnglishWord,
+                    TypeOfWord = d.TypeOfWord,
                     Pronunciation = d.Pronunciation,
                     CategoryName = string.Join(", ", d.Categories), // Gộp tên danh mục thành chuỗi
                     MeaningEnglish = d.Meanings.Select(m => m.MeaningEnglish).FirstOrDefault(),
@@ -96,6 +98,7 @@ namespace DictonaryProject.DataAccess
                     {
                         WordId = d.WordId,
                         EnglishWord = d.EnglishWord,
+                        TypeOfWord = d.TypeOfWord,
                         Pronunciation = d.Pronunciation,
                         CategoryName = string.Join(", ", d.Categories.Select(c => c.CategoryName)), // Gộp tên danh mục thành chuỗi
                         MeaningEnglish = d.Meanings.Select(m => m.EnglishMeaning).FirstOrDefault(),
@@ -119,7 +122,7 @@ namespace DictonaryProject.DataAccess
         }
 
 
-        public bool AddNewWord(string englishWord, List<string> categoryNames, string pronunciation,
+        public bool AddNewWord(string englishWord,string typeOfWord, List<string> categoryNames, string pronunciation,
                        int createdByUserId, string englishMeaning, string vietnameseMeaning,
                        string exampleSentence, bool isUser, bool addCategoryIfNotExist)
 
@@ -139,6 +142,7 @@ namespace DictonaryProject.DataAccess
                     Dictionary newWord = new Dictionary
                     {
                         EnglishWord = englishWord,
+                        TypeOfWord = typeOfWord,
                         Pronunciation = pronunciation,
                         CreatedBy = createdByUserId,
                         CreatedDate = DateTime.Now,

@@ -69,6 +69,7 @@ namespace DictonaryProject
                 return;
             }
             MessageBox.Show("Login successful.");
+            this.Close();
 
 
         }

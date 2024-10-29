@@ -98,9 +98,23 @@ Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1
                         <TextBlock Text="English Word:" Foreground="DarkGray" FontSize="12"/>
                         <TextBox x:Name="txtEnglishWord" FontSize="13" Margin="0,5,0,15" Padding="10"/>
 
+                        <TextBlock Text="Type Of Word:" Foreground="DarkGray" FontSize="12"/>
+                        <ComboBox x:Name="cbTypeOfWord" FontSize="13" Margin="0,5,0,15" Padding="10">
+                            <ComboBoxItem Content="Noun" />
+                            <ComboBoxItem Content="Verb"/>
+                            <ComboBoxItem Content="Adjective"/>
+                            <ComboBoxItem Content="Adverb"/>
+                            <ComboBoxItem Content="Preposition"/>
+                            <ComboBoxItem Content="Conjunction"/>
+                            <ComboBoxItem Content="Interjection"/>
+                        </ComboBox>
+
+
+
                         <TextBlock Text="Categories:" Foreground="DarkGray" FontSize="12"/>
                         <ListBox x:Name="lstCategories" SelectionMode="Multiple" Height="100" Margin="0,5,0,5"/>
 
+                        
                         <!-- Thêm danh mục mới -->
                         <TextBlock Text="Add New Category:" Foreground="DarkGray" FontSize="12"/>
                         <DockPanel Margin="0,5,0,15">

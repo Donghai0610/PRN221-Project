@@ -39,6 +39,7 @@ namespace DictonaryProject.DataAccess
                     {
                         WordID = d.WordId,
                         EnglishWord = d.EnglishWord,
+                        TypeOfWord = d.TypeOfWord,
                         Pronunciation = d.Pronunciation,
                         IsApproved = d.IsApproved,
                         CreatedBy = d.CreatedByNavigation.Username, 
@@ -57,6 +58,7 @@ namespace DictonaryProject.DataAccess
                 {
                     WordId = d.WordID,
                     EnglishWord = d.EnglishWord,
+                    TypeOfWord = d.TypeOfWord,
                     Pronunciation = d.Pronunciation,
                     CreatedBy = d.CreatedBy, // Tên người tạo
                     CategoryName = string.Join(", ", d.Categories), // Gộp tên danh mục thành chuỗi
@@ -94,6 +96,7 @@ namespace DictonaryProject.DataAccess
                     {
                         WordID = d.WordId,
                         EnglishWord = d.EnglishWord,
+                        TypeOfWord = d.TypeOfWord,
                         Pronunciation = d.Pronunciation,
                         IsApproved = d.IsApproved,
                         CreatedBy = d.CreatedByNavigation.Username,
@@ -112,6 +115,7 @@ namespace DictonaryProject.DataAccess
                 {
                     WordId = d.WordID,
                     EnglishWord = d.EnglishWord,
+                    TypeOfWord = d.TypeOfWord,
                     Pronunciation = d.Pronunciation,
                     CreatedBy = d.CreatedBy, // Tên người tạo
                     CategoryName = string.Join(", ", d.Categories), // Gộp tên danh mục thành chuỗi
@@ -202,7 +206,7 @@ namespace DictonaryProject.DataAccess
         }
 
 
-        public bool UpdateWord(int wordId, string englishWord, List<string> categoryNames,
+        public bool UpdateWord(int wordId, string englishWord,string typeOfWord, List<string> categoryNames,
                        string pronunciation, int createdByUserId, string englishMeaning,
                        string vietnameseMeaning, string exampleSentence)
         {
@@ -224,6 +228,7 @@ namespace DictonaryProject.DataAccess
 
                     // Cập nhật các trường khác của từ (trừ IsApproved)
                     wordToUpdate.EnglishWord = englishWord;
+                    wordToUpdate.TypeOfWord = typeOfWord;
                     wordToUpdate.Pronunciation = pronunciation;
                     wordToUpdate.CreatedBy = createdByUserId;
                     wordToUpdate.CreatedDate = DateTime.Now; // Cập nhật lại thời gian tạo

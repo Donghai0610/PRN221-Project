@@ -60,6 +60,7 @@ namespace DictonaryProject
             }
             // Kiểm tra các trường có giá trị hợp lệ
             string englishWord = txtEnglishWord.Text;
+            string type = cbTypeOfWord.Text;
             string pronunciation = txtPronunciation.Text;
             string englishMeaning = txtMeaningEnglish.Text;
             string vietnameseMeaning = txtMeaningVietnamese.Text;
@@ -81,7 +82,7 @@ namespace DictonaryProject
 
             
             // Gọi hàm UpdateWord để cập nhật từ
-            bool isUpdated = _dictionaryRepository.UpdateWord(wordID, englishWord, categoryNames,
+            bool isUpdated = _dictionaryRepository.UpdateWord(wordID, englishWord,type, categoryNames,
                                                               pronunciation, CurrentUser.LoggedInUser.UserId,
                                                               englishMeaning, vietnameseMeaning,
                                                               exampleSentence);
@@ -113,6 +114,7 @@ namespace DictonaryProject
             {
                 txtEnglishWord.Text = word.EnglishWord;
                 txtPronunciation.Text = word.Pronunciation;
+                cbTypeOfWord.SelectedItem = word.TypeOfWord;
 
                 var meaning = word.Meanings.FirstOrDefault();
                 if (meaning != null)

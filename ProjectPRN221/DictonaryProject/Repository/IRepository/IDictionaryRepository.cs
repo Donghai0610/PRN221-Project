@@ -15,7 +15,7 @@ namespace DictonaryProject.Repository.IRepository
 
         List<object> SearchByWordAndCategory(string keyword, string categoryName);
 
-        bool AddNewWord(string englishWord, List<string> categoryNames, string pronunciation,
+        bool AddNewWord(string englishWord,string type, List<string> categoryNames, string pronunciation,
                          int createdByUserId, string englishMeaning, string vietnameseMeaning,
                          string exampleSentence, bool isUser, bool addCategoryIfNotExist);
 
@@ -35,7 +35,7 @@ namespace DictonaryProject.Repository.IRepository
 
         bool DeleteWord(int dictionaryId);
 
-        bool UpdateWord(int wordId, string englishWord, List<string> categoryNames,
+        bool UpdateWord(int wordId, string englishWord,string typeOfWord, List<string> categoryNames,
                        string pronunciation, int createdByUserId, string englishMeaning,
                        string vietnameseMeaning, string exampleSentence);
         int GetUnapprovedWordCount();
