@@ -81,7 +81,7 @@ namespace DictonaryProject
             }
             else
             {
-                MessageBox.Show("No results found.");
+                MessageBox.Show("Không tìm thấy kết quả nào.");
                 dgvDictionary.ItemsSource = null;
             }
         }
@@ -121,7 +121,7 @@ namespace DictonaryProject
             }
             else
             {
-                MessageBox.Show("Please select a word to update.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn một từ để cập nhật.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

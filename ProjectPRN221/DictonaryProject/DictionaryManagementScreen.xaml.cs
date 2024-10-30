@@ -71,7 +71,7 @@ namespace DictonaryProject
             }
             else
             {
-                MessageBox.Show("No results found.");
+                MessageBox.Show("Không tìm thấy kết quả nào.");
                 dgvDictionary.ItemsSource = null;
             }
         }
@@ -92,26 +92,26 @@ namespace DictonaryProject
 
                 int wordId = selectedItem.WordId;
 
-                var result = MessageBox.Show("Are you sure you want to delete this word?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa từ này không?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
                     bool isDeleted = _dictionaryRepository.DeleteWord(wordId);
                     if (isDeleted)
                     {
-                        MessageBox.Show("Word deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Xóa từ thành công.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                         ShowDictionaries();
                         LoadNotification();
                     }
                     else
                     {
-                        MessageBox.Show("Word deletion failed.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Không xóa được từ.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Please select a word to delete.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn từ để xóa.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -151,7 +151,7 @@ namespace DictonaryProject
             }
             else
             {
-                MessageBox.Show("Please select a word to update.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Hãy chọn từ để sửa ", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -181,13 +181,13 @@ namespace DictonaryProject
             bool isApproved = _dictionaryRepository.ApproveWord(wordID);
             if (isApproved)
             {
-                MessageBox.Show("Word approved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Từ đã được duyệt", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 ShowDictionaries();
                 LoadNotification();
             }
             else
             {
-                MessageBox.Show("Word approval failed.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Duyệt từ không thành công!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

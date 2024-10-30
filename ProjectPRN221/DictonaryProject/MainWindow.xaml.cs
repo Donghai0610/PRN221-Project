@@ -59,16 +59,16 @@ namespace DictonaryProject
             }
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Username and password are required.");
+                MessageBox.Show("Hãy điền đầy đủ thông tin đăng nhập");
                 return;
             }
             var user = _userRepository.Login(username, password);
             if (user == null)
             {
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Tài khoản hoặc mật khẩu không đúng.");
                 return;
             }
-            MessageBox.Show("Login successful.");
+            MessageBox.Show("Đăng nhập thành công.");
             this.Close();
 
 
@@ -91,7 +91,7 @@ namespace DictonaryProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving credentials: {ex.Message}");
+                MessageBox.Show($"Lưu file không thành công. Lỗi:  {ex.Message}");
             }
         }
         private void ClearUserCredentials()
@@ -105,7 +105,7 @@ namespace DictonaryProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error clearing credentials: {ex.Message}");
+                MessageBox.Show($"Xóa dữ liệu file không thành công. Lỗi:  {ex.Message}");
             }
         }
         private void LoadRememberedUser()
@@ -125,7 +125,7 @@ namespace DictonaryProject
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading remembered user: {ex.Message}");
+                MessageBox.Show($"Không tải được thông tin người dùng đã lưu: {ex.Message}");
             }
         }
     }
