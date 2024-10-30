@@ -149,7 +149,7 @@ namespace DictonaryProject
             else
             {
                 MessageBox.Show("Không tìm thấy từ này.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                Close(); // Đóng form nếu không tìm thấy từ
+                this.Close(); // Đóng form nếu không tìm thấy từ
             }
         }
 

@@ -81,11 +81,14 @@ namespace DictonaryProject
                     this.Close();
 
                 }
-                MessageBox.Show("Từ đã được thêm thành công.", "Thông báo",
-                                    MessageBoxButton.OK, MessageBoxImage.Information);
-                DictionaryManagementScreen dictionaryManagementScreen = new DictionaryManagementScreen();
-                dictionaryManagementScreen.Show();
-                this.Close();
+                else
+                {
+                    MessageBox.Show("Từ đã được thêm thành công.", "Thông báo",
+                                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    DictionaryManagementScreen dictionaryManagementScreen = new DictionaryManagementScreen();
+                    dictionaryManagementScreen.Show();
+                    this.Close();
+                }
             }
         }
 
