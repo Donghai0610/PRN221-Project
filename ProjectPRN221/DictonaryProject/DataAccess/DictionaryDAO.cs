@@ -48,7 +48,7 @@ namespace DictonaryProject.DataAccess
                             MeaningEnglish = m.EnglishMeaning,
                             MeaningVietnamese = m.VietnameseMeaning,
                             Example = m.ExampleSentence
-                        }).ToList() 
+                        }).ToList()
                     })
                     .ToList();
 
@@ -122,13 +122,13 @@ namespace DictonaryProject.DataAccess
         }
 
 
-        public bool AddNewWord(string englishWord,string typeOfWord, List<string> categoryNames, string pronunciation,
+        public bool AddNewWord(string englishWord, string typeOfWord, List<string> categoryNames, string pronunciation,
                        int createdByUserId, string englishMeaning, string vietnameseMeaning,
-                       string exampleSentence, bool isUser, bool addCategoryIfNotExist)
+                       string exampleSentence, bool isUser)
 
         {
 
-            if(ValidateWordExistence(englishWord, englishMeaning, vietnameseMeaning))
+            if (ValidateWordExistence(englishWord, englishMeaning, vietnameseMeaning))
             {
                 MessageBox.Show("Từ đã tồn tại trong từ điển", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -152,15 +152,8 @@ namespace DictonaryProject.DataAccess
                     foreach (var categoryName in categoryNames)
                     {
                         Category category;
+                        category = context.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
 
-                        if (addCategoryIfNotExist)
-                        {
-                            category = AddCategory(categoryName);
-                        }
-                        else
-                        {
-                            category = context.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
-                        }
 
                         if (category != null && !newWord.Categories.Contains(category))
                         {
@@ -174,7 +167,7 @@ namespace DictonaryProject.DataAccess
                         EnglishMeaning = englishMeaning,
                         VietnameseMeaning = vietnameseMeaning,
                         ExampleSentence = exampleSentence,
-                        Word = newWord // Liên kết nghĩa với từ mới
+                        Word = newWord
                     };
 
                     context.Dictionaries.Add(newWord);

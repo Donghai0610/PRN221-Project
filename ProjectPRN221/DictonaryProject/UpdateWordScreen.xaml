@@ -119,11 +119,7 @@
                         <ListBox x:Name="lstCategories" SelectionMode="Multiple" Height="100" Margin="0,5,0,5"/>
 
                         <!-- Thêm danh mục mới -->
-                        <TextBlock Text="Add New Category:" Foreground="DarkGray" FontSize="12"/>
-                        <DockPanel Margin="0,5,0,15">
-                            <TextBox x:Name="txtNewCategory" FontSize="13" Padding="10" Width="200"/>
-                            <Button Content="Add Category" Width="100" Margin="5,0,0,0" Click="btnAddCategory_Click"/>
-                        </DockPanel>
+                        
 
                         <TextBlock Text="Pronunciation:" Foreground="DarkGray" FontSize="12"/>
                         <TextBox x:Name="txtPronunciation" FontSize="13" Margin="0,5,0,15" Padding="10"/>

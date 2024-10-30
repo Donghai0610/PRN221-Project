@@ -37,20 +37,20 @@ namespace DictonaryProject
             // Kiểm tra điều kiện nhập liệu
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
             {
-                MessageBox.Show("Please fill all the fields.");
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin");
                 return;
             }
 
             if (password != confirmPassword)
             {
-                MessageBox.Show("Passwords do not match.");
+                MessageBox.Show("Mật khâu không trùng khớp với nhau.");
                 return;
             }
 
             bool isExist = _userRepository.checkUserNameExist(username);
             if (isExist)
             {
-                MessageBox.Show("Username already exists.");
+                MessageBox.Show("Tên người dùng đã tồn tại trong hệ thống.");
                 return;
             }
 
@@ -58,14 +58,14 @@ namespace DictonaryProject
 
             if (isRegistered)
             {
-                MessageBox.Show("Registration successful!");
+                MessageBox.Show("Đăng ký tài khoản thành công!");
                 MainWindow loginScreen = new MainWindow();
                 loginScreen.Show();
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Registration failed. Please try again.");
+                MessageBox.Show("Đăng ký tài khoản thất bại vui lòng thử lại!");
             }
         }
 

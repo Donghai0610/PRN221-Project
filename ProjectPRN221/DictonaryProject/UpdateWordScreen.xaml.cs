@@ -45,10 +45,7 @@ namespace DictonaryProject
             Close();
         }
 
-        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {

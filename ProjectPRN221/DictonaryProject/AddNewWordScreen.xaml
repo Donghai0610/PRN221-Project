@@ -44,10 +44,10 @@
                     <TextBlock Text="Add New Word" Foreground="DarkGray" FontSize="10" FontFamily="Montserrat" 
                                Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <TextBlock x:Name="txtUsername" Text="{Binding Path=CurrentUser.LoggedInUser.Username}" Foreground="DarkGray" FontSize="20" FontFamily="Montserrat" 
-Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0"/>
+                                    Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0"/>
                     <Button x:Name="btnLogout" Content="Logout" Foreground="White" FontSize="10"
-            FontFamily="Montserrat" Cursor="Hand" Click="btnLogout_Click" 
-            Margin="869,3,22,7">
+                     FontFamily="Montserrat" Cursor="Hand" Click="btnLogout_Click" 
+                     Margin="869,3,22,7">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#DA34AE"/>
@@ -118,7 +118,7 @@ Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1
                         <!-- Thêm danh mục mới -->
                         <TextBlock Text="Add New Category:" Foreground="DarkGray" FontSize="12"/>
                         <DockPanel Margin="0,5,0,15">
-                            <TextBox x:Name="txtNewCategory" FontSize="13" Padding="10" Width="200"/>
+                            <TextBox x:Name="txtNewCategory" FontSize="13" Padding="10" Width="773" Height="48"/>
                             <Button Content="Add Category" Width="100" Margin="5,0,0,0" Click="btnAddCategory_Click"/>
                         </DockPanel>
 

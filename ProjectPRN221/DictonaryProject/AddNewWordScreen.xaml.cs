@@ -44,7 +44,7 @@ namespace DictonaryProject
         {
             if (CurrentUser.LoggedInUser == null)
             {
-                MessageBox.Show("You need to be logged in to add a new word.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Bạn cần phải đăng nhập để thêm từ mới vào!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -60,30 +60,19 @@ namespace DictonaryProject
             // Lấy danh sách tên danh mục từ ListBox
             List<string> categoryNames = lstCategories.SelectedItems.Cast<Category>()
                                         .Select(c => c.CategoryName).ToList();
-            bool addCategoryIfNotExist = false;
 
-            if (!string.IsNullOrEmpty(txtNewCategory.Text))
-            {
-                addCategoryIfNotExist = MessageBox.Show("Bạn có muốn thêm danh mục mới nếu chưa có?",
-                                                        "Xác nhận", MessageBoxButton.YesNo,
-                                                        MessageBoxImage.Question) == MessageBoxResult.Yes;
-
-                if (addCategoryIfNotExist && !categoryNames.Contains(txtNewCategory.Text))
-                {
-                    categoryNames.Add(txtNewCategory.Text);
-                }
-            }
+           
 
 
 
             // Thực hiện thêm từ mới
             bool isAdded = _dictionaryRepository.AddNewWord(englishWord,type, categoryNames, pronunciation, createdByUserId,
                                       englishMeaning, vietnameseMeaning, exampleSentence,
-                                      isUser, addCategoryIfNotExist);
+                                      isUser);
 
             if (isAdded)
             {
-                MessageBox.Show("Từ đã được thêm thành công.", "Thông báo",
+                MessageBox.Show("Từ đã được thêm thành công.Hãy đợi quản trị viên phê duyệt từ của bạn mới thêm vào", "Thông báo",
                                 MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -109,6 +98,27 @@ namespace DictonaryProject
         private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
 
+            if (!string.IsNullOrEmpty(txtNewCategory.Text))
+            {
+                string categoryName = txtNewCategory.Text;
+                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thêm danh mục này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if(result == MessageBoxResult.Yes)
+                {
+                    Category newCategory = _dictionaryRepository.AddCategory(categoryName);
+                    if (newCategory != null) {
+                        MessageBox.Show("Danh mục đã được thêm thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ShowCategories();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Danh mục đã tồn tại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+
+                
+
+            }
         }
 
         private void lstCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)

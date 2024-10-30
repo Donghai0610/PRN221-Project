@@ -16,9 +16,9 @@ namespace DictonaryProject.Repository
             return DictionaryDAO.Instance.AddCategory(categoryName);
         }
 
-        public bool AddNewWord(string englishWord, string type, List<string> categoryNames, string pronunciation, int createdByUserId, string englishMeaning, string vietnameseMeaning, string exampleSentence, bool isUser, bool addCategoryIfNotExist)
+        public bool AddNewWord(string englishWord, string type, List<string> categoryNames, string pronunciation, int createdByUserId, string englishMeaning, string vietnameseMeaning, string exampleSentence, bool isUser)
         {
-            return DictionaryDAO.Instance.AddNewWord(englishWord,type, categoryNames, pronunciation, createdByUserId, englishMeaning, vietnameseMeaning, exampleSentence, isUser, addCategoryIfNotExist);
+            return DictionaryDAO.Instance.AddNewWord(englishWord,type, categoryNames, pronunciation, createdByUserId, englishMeaning, vietnameseMeaning, exampleSentence, isUser);
         }
 
       

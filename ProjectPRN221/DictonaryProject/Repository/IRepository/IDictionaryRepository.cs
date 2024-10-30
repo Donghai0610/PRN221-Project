@@ -17,7 +17,7 @@ namespace DictonaryProject.Repository.IRepository
 
         bool AddNewWord(string englishWord,string type, List<string> categoryNames, string pronunciation,
                          int createdByUserId, string englishMeaning, string vietnameseMeaning,
-                         string exampleSentence, bool isUser, bool addCategoryIfNotExist);
+                         string exampleSentence, bool isUser);
 
 
         bool ValidateWordExistence(string englishWord, string englishMeaning, string vietnameseMeaning);
