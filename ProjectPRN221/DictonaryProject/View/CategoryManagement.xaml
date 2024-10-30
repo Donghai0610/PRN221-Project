@@ -1,18 +1,18 @@
-﻿<Window x:Class="DictonaryProject.DictionaryMainScreen"
+﻿<Window x:Class="DictonaryProject.CategoryManagement"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DictonaryProject"
         mc:Ignorable="d"
-        Title="DictionaryMainScreen" Height="600" Width="800"
+        Title="CategoryManagement" Height="500" Width="800"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-        Background="White"
-        AllowsTransparency="True" MouseDown="Window_MouseDown" Loaded="Window_Loaded">
-
-   <Border CornerRadius="12">
+        Background="WhiteSmoke"
+        AllowsTransparency="True" MouseDown="Window_MouseDown">
+    
+    <Border CornerRadius="12">
         <Border CornerRadius="10" BorderThickness="2" Opacity="0.95" >
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -43,8 +43,7 @@
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Dictionary" Foreground="DarkGray" FontSize="10" FontFamily="Montserrat" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
-
+                    <TextBlock Text="Dictionary Management" Foreground="DarkGray" FontSize="10" FontFamily="Montserrat" Grid.Column="0" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <TextBlock x:Name="txtUsername" Text="{Binding Path=CurrentUser.LoggedInUser.Username}" Foreground="DarkGray" FontSize="20" FontFamily="Montserrat" 
 Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,0,0"/>
                     <Button x:Name="btnLogout" Content="Logout" Foreground="White" FontSize="10"
@@ -61,10 +60,8 @@ Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1
                             </Style>
                         </Button.Style>
                     </Button>
-
-
                     <Button x:Name="btnMinimize" BorderThickness="0" Content="-" Foreground="White" FontSize="16"
-                            FontFamily="Montserrat" Cursor="Hand" Grid.Column="1" Click="btnMinimize_Click" >
+                         FontFamily="Montserrat" Cursor="Hand" Grid.Column="1" Click="btnMinimize_Click" >
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="#28AEED"/>
@@ -79,24 +76,24 @@ Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
+                                     CornerRadius="9"
+                                     Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                   HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
                     <Button x:Name="btnClose"                          
 
-                             BorderThickness="0"
-                             Content="X"
-                             Foreground="White"
-                             FontSize="12"
-                             FontFamily="Montserrat"
-                             Cursor="Hand"
-                             Grid.Column="2"
-                             Click="btnClose_Click">
+                          BorderThickness="0"
+                          Content="X"
+                          Foreground="White"
+                          FontSize="12"
+                          FontFamily="Montserrat"
+                          Cursor="Hand"
+                          Grid.Column="2"
+                          Click="btnClose_Click">
 
                         <Button.Style>
                             <Style TargetType="Button">
@@ -112,10 +109,10 @@ Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
-                                                   CornerRadius="9"
-                                                   Background="{TemplateBinding Background}">
+                                                CornerRadius="9"
+                                                Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
+                                                   HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
@@ -124,27 +121,34 @@ Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="1
 
                 <!-- Các ô tìm kiếm -->
                 <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
-                    <TextBlock Text="Search by Word" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat"/>
-                    <TextBox x:Name="txtSearchWord" FontSize="12" FontFamily="Montserrat" Height="30" Margin="0,5,0,10" />
 
-                    <TextBlock Text="Search by Category" Foreground="DarkGray" FontSize="12" FontWeight="Medium" FontFamily="Montserrat"/>
-                    <ComboBox x:Name="cboCategories" FontSize="12" FontFamily="Montserrat" Height="30" Margin="0,5,0,10">
-                        <!-- Thêm các mục cho danh sách chọn -->
-                    </ComboBox>
+                    <!-- Nhập tên danh mục -->
+                    <TextBlock Text="Category Name" FontSize="12" Foreground="DarkGray" FontFamily="Montserrat"/>
+                    <TextBox x:Name="txtCategoryName" FontSize="15" FontFamily="Montserrat" Height="30" Margin="0,5,0,10" />
+
+                   
+
+                    <!-- Khu vực nút chức năng -->
                     <DockPanel HorizontalAlignment="Center">
-                        <Button x:Name="btnSearch" Content="Search" Width="100" Height="30" Click="btnSearch_Click_1" Margin="0,10,10,0"  />
-                        <Button x:Name="btnAddWord" Content="Add Word" Width="100" Height="30" Margin="0,10,10,0" Click="btnAddWord_Click"   />
-                        <Button x:Name="btnReset" Content="Reset" Width="100" Height="30" Margin="0,10,10,0" Click="btnReset_Click"/>
+                        <Button x:Name="btnAddCategory" Content="Thêm Mới" Width="100" Height="30" Margin="5" Click="btnAddCategory_Click" ToolTip="Add a new category"/>
+                        <Button x:Name="btnUpdateCategory" Content="Cập Nhật" Width="100" Height="30" Margin="5" Click="btnUpdateCategory_Click" ToolTip="Update selected category"/>
+                        <Button x:Name="btnDeleteCategory" Content="Xóa" Width="100" Height="30" Margin="5" Click="btnDeleteCategory_Click" ToolTip="Delete selected category"/>
+                        <Button x:Name="btnSearchCategory" Content="Tìm Kiếm" Width="100" Height="30" Margin="5" Click="btnSearchCategory_Click" ToolTip="Search for categories"/>
+                        <Button x:Name="btnBack" Content="Quay Về" Width="100" Height="30" Margin="5" Click="btnBack_Click" ToolTip="Back to screen management"/>
                     </DockPanel>
-                 
                 </StackPanel>
 
-                <!-- DataGrid hiển thị kết quả -->
-                <DataGrid x:Name="dgvDictionary" Grid.Row="2" AutoGenerateColumns="True" Margin="10" MouseDoubleClick="dgvDictionary_MouseDoubleClick">
+                <DataGrid x:Name="dgvCategory" Grid.Row="2" AutoGenerateColumns="False" Margin="10"  SelectionChanged="dgvCategory_SelectionChanged"  BorderThickness="0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="WordId" Binding="{Binding WordId}" Visibility="Hidden"/>
+                        <DataGridTextColumn Header="Category ID" 
+                            Binding="{Binding CategoryId}" 
+                            Width="*" Visibility="Hidden" />
+
+                        <!-- Cột hiển thị Category Name -->
+                        <DataGridTextColumn Header="Category Name" 
+                            Binding="{Binding CategoryName}" 
+                            Width="*" />
                     </DataGrid.Columns>
-                   
                 </DataGrid>
             </Grid>
         </Border>

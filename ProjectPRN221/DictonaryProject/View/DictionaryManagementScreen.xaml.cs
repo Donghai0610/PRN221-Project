@@ -1,25 +1,12 @@
 ﻿using DictonaryProject.Repository.IRepository;
 using DictonaryProject.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using DictonaryProject.Models;
 
 namespace DictonaryProject
 {
-    /// <summary>
-    /// Interaction logic for DictionaryManagementScreen.xaml
-    /// </summary>
+ 
     public partial class DictionaryManagementScreen : Window
     {
 
@@ -34,7 +21,11 @@ namespace DictonaryProject
 
             }
         }
-
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
         private void btnAddWord_Click(object sender, RoutedEventArgs e)
         {
             AddNewWordScreen addNewWordScreen = new AddNewWordScreen();
@@ -86,33 +77,31 @@ namespace DictonaryProject
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
 
-            if (dgvDictionary.SelectedItem != null)
-            {
-                dynamic selectedItem = dgvDictionary.SelectedItem;
+            var selectedItems = dgvDictionary.SelectedItems.Cast<dynamic>().ToList();
 
-                int wordId = selectedItem.WordId;
-
-                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa từ này không?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    bool isDeleted = _dictionaryRepository.DeleteWord(wordId);
-                    if (isDeleted)
-                    {
-                        MessageBox.Show("Xóa từ thành công.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                        ShowDictionaries();
-                        LoadNotification();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không xóa được từ.", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
-            else
+            if (!selectedItems.Any())
             {
                 MessageBox.Show("Vui lòng chọn từ để xóa.", "No Word Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
+            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa từ này không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                List<int> wordIds = selectedItems.Where(item => item.WordId != null).Select(items =>(int) items.WordId).ToList();
+
+                bool isDeleted = _dictionaryRepository.DeleteWord(wordIds);
+                if (isDeleted)
+                {
+                    MessageBox.Show("Xóa từ thành công", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ShowDictionaries();
+                    LoadNotification();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa từ không thành công", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
         }
 
         private void ShowCategories()
@@ -196,6 +185,13 @@ namespace DictonaryProject
             CurrentUser.ClearUser();
             var loginWindow = new MainWindow();
             loginWindow.Show();
+            this.Close();
+        }
+
+        private void btnCategory_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryManagement management = new CategoryManagement();
+            management.Show();
             this.Close();
         }
     }

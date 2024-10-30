@@ -23,16 +23,23 @@ namespace DictonaryProject
     /// </summary>
     public partial class UpdateWordScreen : Window
     {
-
+        public List<string> WordTypes { get; set; }
         private readonly IDictionaryRepository _dictionaryRepository = new DictionariesRepository();
         private int wordID;
         public UpdateWordScreen(int id)
         {
             InitializeComponent();
             wordID = id;
+            WordTypes = new List<string> { "Noun", "Verb", "Adjective", "Adverb", "Preposition", "Conjunction", "Interjection" };
             ShowCategories();
             LoadData();
-
+           
+            cbTypeOfWord.ItemsSource = WordTypes;
+        }
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -98,20 +105,27 @@ namespace DictonaryProject
         private void btnBackToDictionary_Click(object sender, RoutedEventArgs e)
         {
             DictionaryManagementScreen dictionaryManagementScreen = new DictionaryManagementScreen();
+            this.Close();
             dictionaryManagementScreen.Show();
-            Close();
+            
         }
 
 
         void LoadData()
         {
+            if (WordTypes == null)
+            {
+                WordTypes = new List<string> { "Noun", "Verb", "Adjective", "Adverb", "Preposition", "Conjunction", "Interjection" };
+            }
             var word = _dictionaryRepository.GetWordById(wordID);
 
             if (word != null)
             {
                 txtEnglishWord.Text = word.EnglishWord;
                 txtPronunciation.Text = word.Pronunciation;
-                cbTypeOfWord.SelectedItem = word.TypeOfWord;
+
+                // Sử dụng SelectedItem để bind giá trị loại từ
+                    cbTypeOfWord.SelectedItem = word.TypeOfWord;
 
                 var meaning = word.Meanings.FirstOrDefault();
                 if (meaning != null)
@@ -139,6 +153,7 @@ namespace DictonaryProject
             }
         }
 
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //ShowCategories();
@@ -162,6 +177,11 @@ namespace DictonaryProject
             var loginWindow = new MainWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        private void cbTypeOfWord_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

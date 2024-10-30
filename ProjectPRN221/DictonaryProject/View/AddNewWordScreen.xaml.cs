@@ -72,8 +72,20 @@ namespace DictonaryProject
 
             if (isAdded)
             {
-                MessageBox.Show("Từ đã được thêm thành công.Hãy đợi quản trị viên phê duyệt từ của bạn mới thêm vào", "Thông báo",
-                                MessageBoxButton.OK, MessageBoxImage.Information);
+                if (isUser)
+                {
+                    MessageBox.Show("Từ đã được thêm thành công.Hãy đợi quản trị viên phê duyệt từ của bạn mới thêm vào", "Thông báo",
+                                    MessageBoxButton.OK, MessageBoxImage.Information);
+                    DictionaryMainScreen dictionaryMainScreen = new DictionaryMainScreen();
+                    dictionaryMainScreen.Show();
+                    this.Close();
+
+                }
+                MessageBox.Show("Từ đã được thêm thành công.", "Thông báo",
+                                    MessageBoxButton.OK, MessageBoxImage.Information);
+                DictionaryManagementScreen dictionaryManagementScreen = new DictionaryManagementScreen();
+                dictionaryManagementScreen.Show();
+                this.Close();
             }
         }
 
@@ -95,31 +107,6 @@ namespace DictonaryProject
            
         }
 
-        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (!string.IsNullOrEmpty(txtNewCategory.Text))
-            {
-                string categoryName = txtNewCategory.Text;
-                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thêm danh mục này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if(result == MessageBoxResult.Yes)
-                {
-                    Category newCategory = _dictionaryRepository.AddCategory(categoryName);
-                    if (newCategory != null) {
-                        MessageBox.Show("Danh mục đã được thêm thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                        ShowCategories();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Danh mục đã tồn tại.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-
-                
-
-            }
-        }
 
         private void lstCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -149,6 +136,12 @@ namespace DictonaryProject
             var loginWindow = new MainWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace DictonaryProject.Repository.IRepository
         bool ApproveWord(int dictionaryId);
         List<Object> GetAllWordsOfAdmin();
 
-        bool DeleteWord(int dictionaryId);
+        bool DeleteWord(List<int> dictionaryId);
 
         bool UpdateWord(int wordId, string englishWord,string typeOfWord, List<string> categoryNames,
                        string pronunciation, int createdByUserId, string englishMeaning,

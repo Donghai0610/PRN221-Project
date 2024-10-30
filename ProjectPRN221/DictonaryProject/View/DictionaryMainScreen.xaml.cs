@@ -132,5 +132,7 @@ namespace DictonaryProject
             loginWindow.Show();
             this.Close();
         }
+
+
     }
 }

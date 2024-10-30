@@ -170,27 +170,32 @@ namespace DictonaryProject.DataAccess
                 }
             }
         }
-        public bool DeleteWord(int wordId)
+        public bool DeleteWords(List<int> wordIds)
         {
             using (PersonalDictionaryDBContext context = new PersonalDictionaryDBContext())
             {
                 try
                 {
-                    // Tìm từ trong bảng Dictionaries với WordID tương ứng
-                    var wordToDelete = context.Dictionaries
-                                              .Include(d => d.Meanings) // Bao gồm các nghĩa liên quan
-                                              .Include(d => d.Categories) // Bao gồm các danh mục liên quan
-                                              .FirstOrDefault(d => d.WordId == wordId);
+                    // Tìm tất cả các từ trong bảng Dictionaries với WordID tương ứng
+                    var wordsToDelete = context.Dictionaries
+                                               .Include(d => d.Meanings) // Bao gồm các nghĩa liên quan
+                                               .Include(d => d.Categories) // Bao gồm các danh mục liên quan
+                                               .Where(d => wordIds.Contains(d.WordId))
+                                               .ToList();
 
-                    // Nếu từ không tồn tại, trả về false
-                    if (wordToDelete == null)
+                    // Nếu không có từ nào tồn tại, trả về false
+                    if (!wordsToDelete.Any())
                     {
                         return false;
                     }
 
-                    context.Meanings.RemoveRange(wordToDelete.Meanings);
-                    wordToDelete.Categories.Clear();
-                    context.Dictionaries.Remove(wordToDelete);
+                    foreach (var word in wordsToDelete)
+                    {
+                        context.Meanings.RemoveRange(word.Meanings);
+                        word.Categories.Clear();
+                    }
+
+                    context.Dictionaries.RemoveRange(wordsToDelete);
 
                     context.SaveChanges();
 
@@ -198,12 +203,12 @@ namespace DictonaryProject.DataAccess
                 }
                 catch (Exception ex)
                 {
-
                     Console.WriteLine("Error: " + ex.Message);
                     return false;
                 }
             }
         }
+
 
 
         public bool UpdateWord(int wordId, string englishWord,string typeOfWord, List<string> categoryNames,
@@ -288,6 +293,7 @@ namespace DictonaryProject.DataAccess
                     WordId = word.WordId,
                     EnglishWord = word.EnglishWord,
                     Pronunciation = word.Pronunciation,
+                    TypeOfWord = word.TypeOfWord,
                     IsApproved = word.IsApproved,
                     CreatedBy = word.CreatedBy,
                     CreatedDate = word.CreatedDate,

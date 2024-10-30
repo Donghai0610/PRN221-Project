@@ -28,9 +28,9 @@ namespace DictonaryProject.Repository
             return DictionaryManagementDAO.Instance.ApproveWord(dictionaryId);
         }
 
-        public bool DeleteWord(int dictionaryId)
+        public bool DeleteWord(List<int> dictionaryId)
         {
-            return DictionaryManagementDAO.Instance.DeleteWord(dictionaryId);
+            return DictionaryManagementDAO.Instance.DeleteWords(dictionaryId);
         }
 
         public List<object> dictionaries()
