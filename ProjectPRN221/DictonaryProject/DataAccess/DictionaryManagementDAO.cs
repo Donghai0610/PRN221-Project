@@ -260,7 +260,7 @@ namespace DictonaryProject.DataAccess
                         }
                     }
 
-                    // Lưu thay đổi vào cơ sở dữ liệu
+                  
                     context.SaveChanges();
                     return true;
                 }
@@ -276,7 +276,7 @@ namespace DictonaryProject.DataAccess
         {
             using (var context = new PersonalDictionaryDBContext())
             {
-                // Tìm từ theo ID và bao gồm các liên kết với nghĩa và danh mục
+                
                 var word = context.Dictionaries
                     .Include(d => d.Meanings)
                     .Include(d => d.Categories)
@@ -284,10 +284,9 @@ namespace DictonaryProject.DataAccess
 
                 if (word == null)
                 {
-                    return null; // Trả về null nếu không tìm thấy từ
+                    return null; 
                 }
 
-                // Trả về đối tượng từ điển với các trường được yêu cầu
                 return new Dictionary
                 {
                     WordId = word.WordId,

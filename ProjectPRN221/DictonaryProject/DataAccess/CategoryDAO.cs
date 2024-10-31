@@ -51,7 +51,7 @@ namespace DictonaryProject.DataAccess
             {
                 var categoriesToDelete = context.Categories.Where(c => categoryIds.Contains(c.CategoryId)).ToList();
 
-                // Kiểm tra nếu có danh mục nào được tìm thấy
+                
                 if (categoriesToDelete.Any())
                 {
                     context.Categories.RemoveRange(categoriesToDelete); 

@@ -35,7 +35,7 @@ namespace DictonaryProject.DataAccess
             {
                 // Truy vấn các từ đã được phê duyệt
                 var dictionary = context.Dictionaries
-                    .Where(d => d.IsApproved == true) // Chỉ lấy các từ được phê duyệt
+                    .Where(d => d.IsApproved == true) 
                     .Select(d => new
                     {
                         WordID = d.WordId,
@@ -52,14 +52,14 @@ namespace DictonaryProject.DataAccess
                     })
                     .ToList();
 
-                // Tạo danh sách đối tượng trả về
+                
                 var result = dictionary.Select(d => new
                 {
                     WordId = d.WordID,
                     EnglishWord = d.EnglishWord,
                     TypeOfWord = d.TypeOfWord,
                     Pronunciation = d.Pronunciation,
-                    CategoryName = string.Join(", ", d.Categories), // Gộp tên danh mục thành chuỗi
+                    CategoryName = string.Join(", ", d.Categories), 
                     MeaningEnglish = d.Meanings.Select(m => m.MeaningEnglish).FirstOrDefault(),
                     MeaningVietnamese = d.Meanings.Select(m => m.MeaningVietnamese).FirstOrDefault(),
                     Example = d.Meanings.Select(m => m.Example).FirstOrDefault()
@@ -70,7 +70,7 @@ namespace DictonaryProject.DataAccess
             }
         }
 
-        //lay all category
+       
         public List<Category> GetAllCategories() => new PersonalDictionaryDBContext().Categories.ToList();
 
         public List<object> SearchByWordAndCategory(string keyword, string categoryName)
@@ -79,28 +79,28 @@ namespace DictonaryProject.DataAccess
             {
                 var query = context.Dictionaries.AsQueryable();
 
-                // Lọc theo từ khóa nếu có
+               
                 if (!string.IsNullOrEmpty(keyword))
                 {
                     query = query.Where(d => d.EnglishWord.Contains(keyword));
                 }
 
-                // Lọc theo danh mục nếu có
+                
                 if (!string.IsNullOrEmpty(categoryName))
                 {
                     query = query.Where(d => d.Categories.Any(c => c.CategoryName.Contains(categoryName)));
                 }
 
-                // Lấy thông tin cần thiết từ kết quả tìm kiếm
+               
                 var results = query
-                    .Where(d => d.IsApproved == true) // Chỉ lấy các từ đã được phê duyệt
+                    .Where(d => d.IsApproved == true) 
                     .Select(d => new
                     {
                         WordId = d.WordId,
                         EnglishWord = d.EnglishWord,
                         TypeOfWord = d.TypeOfWord,
                         Pronunciation = d.Pronunciation,
-                        CategoryName = string.Join(", ", d.Categories.Select(c => c.CategoryName)), // Gộp tên danh mục thành chuỗi
+                        CategoryName = string.Join(", ", d.Categories.Select(c => c.CategoryName)), 
                         MeaningEnglish = d.Meanings.Select(m => m.EnglishMeaning).FirstOrDefault(),
                         MeaningVietnamese = d.Meanings.Select(m => m.VietnameseMeaning).FirstOrDefault(),
                         ExampleSentence = d.Meanings.Select(m => m.ExampleSentence).FirstOrDefault()
@@ -138,7 +138,7 @@ namespace DictonaryProject.DataAccess
             {
                 try
                 {
-                    // Tạo đối tượng từ mới
+                    
                     Dictionary newWord = new Dictionary
                     {
                         EnglishWord = englishWord,
@@ -146,7 +146,7 @@ namespace DictonaryProject.DataAccess
                         Pronunciation = pronunciation,
                         CreatedBy = createdByUserId,
                         CreatedDate = DateTime.Now,
-                        IsApproved = !isUser // Nếu là user thì IsApproved = false
+                        IsApproved = !isUser 
                     };
 
                     foreach (var categoryName in categoryNames)
@@ -161,7 +161,7 @@ namespace DictonaryProject.DataAccess
                         }
                     }
 
-                    // Thêm nghĩa cho từ mới
+                   
                     Meaning newMeaning = new Meaning
                     {
                         EnglishMeaning = englishMeaning,

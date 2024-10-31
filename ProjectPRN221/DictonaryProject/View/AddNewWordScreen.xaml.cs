@@ -54,10 +54,10 @@ namespace DictonaryProject
             string englishMeaning = txtMeaningEnglish.Text;
             string vietnameseMeaning = txtMeaningVietnamese.Text;
             string exampleSentence = txtExampleSentence.Text;
-            int createdByUserId = CurrentUser.LoggedInUser.UserId; // Sử dụng UserID từ người dùng hiện tại
+            int createdByUserId = CurrentUser.LoggedInUser.UserId; 
             bool isUser = CurrentUser.LoggedInUser.Roles.Any(r => r.RoleName == "User");
 
-            // Lấy danh sách tên danh mục từ ListBox
+          
             List<string> categoryNames = lstCategories.SelectedItems.Cast<Category>()
                                         .Select(c => c.CategoryName).ToList();
 
